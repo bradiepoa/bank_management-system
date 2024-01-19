@@ -38,13 +38,13 @@ def  DespoAmo():
 def WithdrawAmount():
     account = input("Enter amount you want to withdraw: ")
     ac=input("Enter Account No:  ")
-    a='select balance from the amount where AccNo=%s'
+    a ='select balance from amount where AccNo=%s'
     data=(ac,)
     x=mydb.cursor()
     x.execute(a, data)
     result=x.fetchone()
-    t=result[0] - amount
-    sql=('update amount set balance where AccNo=%s')
+    t=result[0] - int(account)
+    sql = 'UPDATE amount SET balance=%s WHERE AccNo=%s'
     d=(t,ac)
     x.execute(sql,d)
     mydb.commit()
