@@ -1,14 +1,22 @@
 import mysql.connector
 mydb=mysql.connector.connect(host='localhost',user='root', password='', database='bank_management')
 def OpenAcc():
-    n = input("Enter Name: ")
+    # input validation for required fields
+    while True:
+
+        n = input("Enter Name: ").strip()
+        if n:
+            break
+        else:
+            print("Name is required. Enter valid name")
+
     ac = input("Enter Account No: ")
     db = input("Enter date of birth: ")
     cn = input("Enter contact number: ")
     ob = int(input("Enter opening balance: "))
     add = input("Enter address: ")
     
-    if ob < 2000:
+    if ob >= 2000:
         print("Opening balance should be 2000 at least. Account not created.")
     else:
         # Creating data for insertion into tables
