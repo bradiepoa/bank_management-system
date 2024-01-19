@@ -1,22 +1,39 @@
 import mysql.connector
 mydb=mysql.connector.connect(host='localhost',user='root', password='', database='bank_management')
 def OpenAcc():
-    n=input("Enter Name:  ")
-    ac=input("Enter Account No:  ")
-    db=input("Enter date of birth:  ")
-    cn=input("Enter contact number:  ")
-    ob=int(input("Enter openning balance:  "))
-    add=input("Enter address:  ")
-    # creating save to out tables in the datbase
-    data1=(n,ac,db,cn,ob,add)
-    data2=(n,ac,ob)
-    sql1=('insert into account values (%s,%s,%s,%s,%s,%s)')
-    sql2=('insert into amount values (%s,%s,%s)')
-    x=mydb.cursor()
-    x.execute(sql1,data1)
-    x.execute(sql2,data2)
-    mydb.commit()
-    print("Data submited successfully")
+    n = input("Enter Name: ")
+    ac = input("Enter Account No: ")
+    db = input("Enter date of birth: ")
+    cn = input("Enter contact number: ")
+    ob = int(input("Enter opening balance: "))
+    add = input("Enter address: ")
+    
+    if ob < 2000:
+        print("Opening balance should be 2000 at least. Account not created.")
+    else:
+        # Creating data for insertion into tables
+        data1 = (n, ac, db, cn, ob, add)
+        data2 = (n, ac, ob)
+
+        # SQL statements for insertion
+        sql1 = 'INSERT INTO account VALUES (%s, %s, %s, %s, %s, %s)'
+        sql2 = 'INSERT INTO amount VALUES (%s, %s, %s)'
+
+        # Database connection and cursor
+        x = mydb.cursor()
+
+        try:
+            # Execute the SQL statements
+            x.execute(sql1, data1)
+            x.execute(sql2, data2)
+            mydb.commit()
+
+            print("Data submitted successfully")
+        except mysql.connector.Error as err:
+            print(f"Error: {err}")
+        finally:
+            x.close()
+
     main()
 
 def  DespoAmo():
