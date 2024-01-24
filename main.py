@@ -15,16 +15,17 @@ def OpenAcc():
     cn = input("Enter contact number: ")
     ob = int(input("Enter opening balance: "))
     add = input("Enter address: ")
+    pwd = input("Enter password and must 4 digits: ")
     
-    if ob >= 2000:
-        print("Opening balance should be 2000 at least. Account not created.")
+    if ob < 2000:
+        print("Opening balance should be more than 2000 at least. Account not created.")
     else:
         # Creating data for insertion into tables
-        data1 = (n, ac, db, cn, ob, add)
+        data1 = (n, ac, db, cn, ob, add,pwd)
         data2 = (n, ac, ob)
 
         # SQL statements for insertion
-        sql1 = 'INSERT INTO account VALUES (%s, %s, %s, %s, %s, %s)'
+        sql1 = 'INSERT INTO account VALUES (%s, %s, %s, %s, %s, %s,%s)'
         sql2 = 'INSERT INTO amount VALUES (%s, %s, %s)'
 
         # Database connection and cursor
