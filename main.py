@@ -21,7 +21,7 @@ def OpenAcc():
         print("Opening balance should be more than 2000 at least. Account not created.")
     else:
         # Creating data for insertion into tables
-        data1 = (n, ac, db, cn, ob, add,pwd)
+        data1 = (n, ac, db, cn, ob, add, pwd)
         data2 = (n, ac, ob)
 
         # SQL statements for insertion
@@ -64,8 +64,9 @@ def  DespoAmo():
 def WithdrawAmount():
     account = input("Enter amount you want to withdraw: ")
     ac=input("Enter Account No:  ")
+    pwd = input("Enter password and must 4 digits: ")
     a ='select balance from amount where AccNo=%s'
-    data=(ac,)
+    data=(ac,pwd)
     x=mydb.cursor()
     x.execute(a, data)
     result=x.fetchone()
